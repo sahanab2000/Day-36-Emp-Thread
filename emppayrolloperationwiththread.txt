@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmployeePayrollSystem
+{
+    public class EmployeePayrollOperationWithThread
+    {
+        public List<EmployeeDetails> employeePayrollDetailsList = new List<EmployeeDetails>();
+
+        
+            private void addEmployeePayrollDetailsList (EmployeeDetails employeeDetails )
+            {
+                employeePayrollDetailsList.Add(employeeDetails);
+            }
+
+        public void addEmployeePayrollDetailsListWithThread(List<EmployeeDetails> employeeDetails)
+        {
+            employeeDetails.ForEach(employeeData =>
+            {
+                Task thread = new Task(() =>
+                {
+                    Console.WriteLine("Employee being added: " + employeeData.EmployeeName);
+                    this.addEmployeePayrollDetailsList(employeeData);
+                    Console.WriteLine("Employee added: " + employeeData.EmployeeName);
+                });
+
+                thread.Start();
+            });
+        }
+
+    }
+}

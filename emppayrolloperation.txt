@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+
+namespace EmployeePayrollSystem
+{
+    public class EmployeePayrollOperation
+    {
+        public List<EmployeeDetails> employeePayrollDetailsList = new List<EmployeeDetails>();
+
+        public void addEmployeePayrollDetailsList(List<EmployeeDetails> employeeDetails)
+        {
+            employeeDetails.ForEach(employeeData =>
+            {
+                Console.WriteLine("Employee being added: " + employeeData.EmployeeName);
+                this.addEmployeePayrollDetailsList(employeeData);
+                Console.WriteLine("Employee added: " + employeeData.EmployeeName);
+
+            });
+        }
+            private void addEmployeePayrollDetailsList (EmployeeDetails employeeDetails )
+            {
+                employeePayrollDetailsList.Add(employeeDetails);
+            }
+
+    }
+}
